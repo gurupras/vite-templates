@@ -6,15 +6,11 @@ const path = require('path')
 // Avoids autoconversion to number of the project name by defining that the args
 // non associated with an option ( _ ) needs to be parsed as a string. See #4606
 const argv = require('minimist')(process.argv.slice(2), { string: ['_'] })
-// eslint-disable-next-line node/no-restricted-require
 const prompts = require('prompts')
 const {
   yellow,
-  green,
   cyan,
   blue,
-  magenta,
-  lightRed,
   red
 } = require('kolorist')
 
@@ -26,12 +22,12 @@ const OPTIONS = [
     color: cyan,
     variants: [
       {
-        name: 'bulma-js',
+        name: 'vue3-bulma-js',
         display: 'JavaScript',
         color: yellow
       },
       {
-        name: 'bulma-ts',
+        name: 'vue3-bulma-ts',
         display: 'TypeScript',
         color: blue
       }
@@ -47,7 +43,7 @@ const renameFiles = {
   _gitignore: '.gitignore'
 }
 
-async function init() {
+async function init () {
   let targetDir = argv._[0]
   let template = argv.template || argv.t
 
@@ -74,7 +70,7 @@ async function init() {
             (targetDir === '.'
               ? 'Current directory'
               : `Target directory "${targetDir}"`) +
-            ` is not empty. Remove existing files and continue?`
+            ' is not empty. Remove existing files and continue?'
         },
         {
           type: (_, { overwrite } = {}) => {
@@ -101,7 +97,7 @@ async function init() {
               ? `"${template}" isn't a valid template. Please choose from below: `
               : 'Select a framework:',
           initial: 0,
-          choices: TEMPLATES.map((framework) => {
+          choices: OPTIONS.map((framework) => {
             const frameworkColor = framework.color
             return {
               title: frameworkColor(framework.name),
@@ -170,7 +166,7 @@ async function init() {
     write(file)
   }
 
-  const pkg = require(path.join(templateDir, `package.json`))
+  const pkg = require(path.join(templateDir, 'package.json'))
 
   pkg.name = packageName || targetDir
 
@@ -179,7 +175,7 @@ async function init() {
   const pkgInfo = pkgFromUserAgent(process.env.npm_config_user_agent)
   const pkgManager = pkgInfo ? pkgInfo.name : 'npm'
 
-  console.log(`\nDone. Now run:\n`)
+  console.log('\nDone. Now run:\n')
   if (root !== cwd) {
     console.log(`  cd ${path.relative(cwd, root)}`)
   }
@@ -196,7 +192,7 @@ async function init() {
   console.log()
 }
 
-function copy(src, dest) {
+function copy (src, dest) {
   const stat = fs.statSync(src)
   if (stat.isDirectory()) {
     copyDir(src, dest)
@@ -205,13 +201,13 @@ function copy(src, dest) {
   }
 }
 
-function isValidPackageName(projectName) {
+function isValidPackageName (projectName) {
   return /^(?:@[a-z0-9-*~][a-z0-9-*._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/.test(
     projectName
   )
 }
 
-function toValidPackageName(projectName) {
+function toValidPackageName (projectName) {
   return projectName
     .trim()
     .toLowerCase()
@@ -220,7 +216,7 @@ function toValidPackageName(projectName) {
     .replace(/[^a-z0-9-~]+/g, '-')
 }
 
-function copyDir(srcDir, destDir) {
+function copyDir (srcDir, destDir) {
   fs.mkdirSync(destDir, { recursive: true })
   for (const file of fs.readdirSync(srcDir)) {
     const srcFile = path.resolve(srcDir, file)
@@ -229,11 +225,11 @@ function copyDir(srcDir, destDir) {
   }
 }
 
-function isEmpty(path) {
+function isEmpty (path) {
   return fs.readdirSync(path).length === 0
 }
 
-function emptyDir(dir) {
+function emptyDir (dir) {
   if (!fs.existsSync(dir)) {
     return
   }
@@ -253,7 +249,7 @@ function emptyDir(dir) {
  * @param {string | undefined} userAgent process.env.npm_config_user_agent
  * @returns object | undefined
  */
-function pkgFromUserAgent(userAgent) {
+function pkgFromUserAgent (userAgent) {
   if (!userAgent) return undefined
   const pkgSpec = userAgent.split(' ')[0]
   const pkgSpecArr = pkgSpec.split('/')
