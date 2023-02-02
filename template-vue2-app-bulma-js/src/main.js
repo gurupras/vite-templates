@@ -1,9 +1,5 @@
 import Vue from 'vue'
-import VueCompositionAPI from '@vue/composition-api'
-
 import router from './router'
-
-Vue.use(VueCompositionAPI)
 
 ;(async () => {
 	const { default: App } = await import('./App.vue')
@@ -14,5 +10,3 @@ Vue.use(VueCompositionAPI)
 
 	app.$mount('#app')
 })()
-
-

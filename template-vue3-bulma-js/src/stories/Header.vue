@@ -31,8 +31,8 @@
 </template>
 
 <script>
-import './header.css'
-import MyButton from './Button.vue'
+import './header.css';
+import MyButton from './Button.vue';
 
 export default {
   name: 'my-header',
@@ -41,10 +41,10 @@ export default {
 
   props: {
     user: {
-      type: Object
-    }
+      type: Object,
+    },
   },
 
-  emits: ['login', 'logout', 'createAccount']
-}
+  emits: ['login', 'logout', 'createAccount'],
+};
 </script>
