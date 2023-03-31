@@ -1,7 +1,6 @@
 import { fileURLToPath } from 'url'
 
 import { defineConfig } from 'vite'
-import legacy from '@vitejs/plugin-legacy'
 import vue2 from '@vitejs/plugin-vue2'
 
 import Icons from 'unplugin-icons/vite'
@@ -14,14 +13,10 @@ export default defineConfig({
     vue2({
       jsx: true
     }),
-    legacy({
-      targets: ['ie >= 11'],
-      additionalLegacyPolyfills: ['regenerator-runtime/runtime']
-    }),
     Components({
       resolvers: IconsResolver()
     }),
-    Icons()
+    Icons({ compiler: 'vue2' })
   ],
   resolve: {
     alias: {
