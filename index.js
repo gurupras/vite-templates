@@ -32,6 +32,22 @@ const OPTIONS = [
         color: blue
       }
     ]
+  },
+  {
+    name: 'vue2',
+    color: yellow,
+    variants: [
+      {
+        name: 'vue2-app-bulma-js',
+        display: 'App',
+        color: cyan
+      },
+      {
+        name: 'vue2-lib-bulma-js',
+        display: 'Library',
+        color: blue
+      }
+    ]
   }
 ]
 
