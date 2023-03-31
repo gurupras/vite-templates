@@ -5,11 +5,12 @@
 <div>
   <div class="container">
     <div class="section">
-      <h1 class="title is-size-1"><i-mdi-check/> Ready</h1>
+      <Component/>
     </div>
   </div>
 </div>
 </template>
 
-<style>
+<style lang="scss">
+@import 'bulma/bulma.sass';
 </style>
